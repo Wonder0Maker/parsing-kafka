@@ -29,7 +29,7 @@ def parse_site(producer, url):
         data = {text: address}
         list_of_links.append(address)
         producer.send('links', value=data)
-        sleep(1)
+        # sleep(1)
 
     print(list_of_links)
 
@@ -50,4 +50,4 @@ def parse_items(producer, list_of_links, number_link):
         text = text[4:-3]
         print(text)
         producer.send('meal', value=text)
-        sleep(1)
+        # sleep(1)
