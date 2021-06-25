@@ -1,1 +1,8 @@
 venv/
+outputs/
+dataset/
+
+.idea/
+_pycache_/
+*.pyc
+*.idea
