@@ -43,11 +43,10 @@ def parse_items(producer, list_of_links, number_link):
     response = urlopen(url)
     html = response.read().decode("utf-8")
     soup = BeautifulSoup(html, "html.parser")
-    links = soup.findAll('li', class_='ingredients-item')
+    links = soup.findAll('section', class_='recipe-meta-container two-subcol-content clearfix')
 
     for link in links:
         text = link.text
-        text = text[4:-3]
-        print(text)
+        text = text.replace("\n", " ")
         producer.send('meal', value=text)
         # sleep(1)
