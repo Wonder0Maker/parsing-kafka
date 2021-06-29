@@ -1,5 +1,6 @@
 from kafka import KafkaConsumer
 import csv
+import pandas as pd
 
 
 def consumer_items():
@@ -8,13 +9,9 @@ def consumer_items():
 
     for message in consumer:
         print(message)
-        write_into_csv(message)
 
-
-def write_into_csv(message):
-    with open('ingredients.csv', mode='a') as f:
-        writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(message)
+        ingredients = pd.DataFrame([message.value.decode('utf-8')], columns=['Ingredient'])
+        ingredients.to_csv('ingredients.csv', index=False, mode='a', header=False)
 
 
 consumer_items()
